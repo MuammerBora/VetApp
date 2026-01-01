@@ -1,12 +1,14 @@
 package animal;
 
-public class Cat extends Animal {
-    public Cat(AnimalIdentity identity) {
+public class Bird extends Animal {
+
+    public Bird(AnimalIdentity identity) {
         super(identity);
     }
 
     @Override
     public String getAnimalType() {
-        return "Kedi";
+        return "BIRD";
     }
 }
+
