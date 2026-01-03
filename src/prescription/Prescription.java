@@ -19,8 +19,13 @@ tedavi yöntemi.(tedavi yöntemleri)
 EHR, LSH, ANA, CHW.
 otoskop:kulağın iç bakımı
 */
+
+
 import people.Veterinarian;
 import animal.Animal;
+import java.io.BufferedWriter; // Dosya yazma kütüphanesi
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Date;
 
 public class Prescription {
@@ -35,18 +40,29 @@ public class Prescription {
         this.patient = patient;
         this.medicine = medicine;
         this.dosage = dosage;
-        this.date = new Date(); // Şu anki zamanı alır
+        this.date = new Date();
     }
 
-    public void printPrescription() {
-        // Ekrana basılan reçete formatı (İngilizce)
-        System.out.println("=== PRESCRIPTION DETAILS ===");
-        System.out.println("Date: " + date);
-        System.out.println("Patient: " + patient.getName());
-        // Doktor sınıfı hazır olunca aşağıdaki yorumu açabilirsin
-        // System.out.println("Doctor: " + doctor.getName());
-        System.out.println("Medicine: " + medicine.toString());
-        System.out.println("Dosage: " + dosage.toString());
-        System.out.println("============================");
+    @Override
+    public String toString() {
+        return "=== PRESCRIPTION ===\n" +
+                "Date: " + date + "\n" +
+                "Doctor: " + doctor.getName() + "\n" +
+                "Patient: " + patient.getName() + " (" + patient.getChipId() + ")\n" +
+                "Medicine: " + medicine.getName() + "\n" +
+                "Dosage: " + dosage.toString() + "\n";
+    }
+
+    // --- FILE PROCESSING KISMI (BUNU EKLEDİK) ---
+    public void printToFile() {
+        // Dosya ismi dinamik olsun: Reçete_Pamuk_ZamanDamgası.txt
+        String fileName = "Recete_" + patient.getName() + "_" + System.currentTimeMillis() + ".txt";
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+            writer.write(this.toString());
+            System.out.println("📄 [FILE I/O] Reçete dosyaya yazdırıldı: " + fileName);
+        } catch (IOException e) {
+            System.out.println("❌ Dosya yazma hatası: " + e.getMessage());
+        }
     }
 }
