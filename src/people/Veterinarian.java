@@ -1,14 +1,17 @@
 package people;
 
-public class Veterinarian extends Employee {
+public class Veterinarian extends Person {
 
-    public Veterinarian(String id, String name, String email, String password, String department) {
-        super(id, name, email, password, department);
+    public Veterinarian(String name, String tc) {
+        super(name, tc);
     }
 
     @Override
-    public void showRole() {
-        System.out.println("Rol: VETERİNER");
+    public void showMenu() {
+        System.out.println("1- Kayıtlı Randevular");
+        System.out.println("2- Kayıtlı Hayvanlar");
+        System.out.println("3- Operasyon Geçmişi");
+        System.out.println("4- Operasyon Ekle");
+        System.out.println("5- İlaç Yaz");
     }
 }
-

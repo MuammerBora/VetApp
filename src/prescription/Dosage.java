@@ -18,7 +18,7 @@ public class Dosage {
 
     @Override
     public String toString() {
-        // Çıktı İngilizce olmalı: "3x Daily, 500.0 mg (After meals)"
+        //  "3x Daily, 500.0 mg (After meals)"
         return timesPerDay + "x Daily, " + amountMg + " mg (" + instructions + ")";
     }
 }

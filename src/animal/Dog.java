@@ -1,13 +1,15 @@
 package animal;
 
+import people.PetOwner;
+
 public class Dog extends Animal {
-    public Dog(AnimalIdentity identity) {
-        super(identity);
+
+    public Dog(String name, int age, double weight, Gender gender, String breed, PetOwner owner) {
+        super(name, age, weight, gender, breed, owner);
     }
-//Animal constructor’ı çağrılır
-//Kimlik bilgisi üst sınıfta tutulur
+
     @Override
-    public String getAnimalType() {
-        return "Köpek";
+    public String getAnimalInfo() {
+        return "Köpek: " + getName();
     }
 }

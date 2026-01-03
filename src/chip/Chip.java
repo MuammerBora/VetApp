@@ -1,20 +1,28 @@
 package chip;
 
-import animal.Animal;
+import java.time.LocalDate;
+import java.util.UUID;
 
 public class Chip {
-    //Bir hayvana takılan mikroçipi temsil eder
-    //Her çip benzersiz bir numaraya sahiptir
 
-    private String chipId;
-    private Animal animal;
+    private final String chipNumber;
+    private final LocalDate registerDate;
 
-    public Chip(String chipId, Animal animal) {
-        this.chipId = chipId;
-        this.animal = animal;
+    public Chip() {
+        this.chipNumber = UUID.randomUUID().toString();
+        this.registerDate = LocalDate.now();
     }
 
-    public Animal getAnimal() {
-        return animal;
+    public String getChipNumber() {
+        return chipNumber;
+    }
+
+    public LocalDate getRegisterDate() {
+        return registerDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Chip No: " + chipNumber;
     }
 }

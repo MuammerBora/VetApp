@@ -1,64 +1,51 @@
-
 package animal;
-//Bu satır, Animal sınıfının animal paketine ait olduğunu belirtir.
-// Projedeki hayvanla ilgili tüm sınıflar bu paket altında toplanır.
-// Paketleme, kodun düzenli ve okunabilir olmasını sağlar.
 
-
-import medical.MedicalRecord;
-//Animal sınıfı, hayvanın tıbbi geçmişini tutmak için
-//MedicalRecord sınıfını kullanacağı için bu import eklenmiştir.
-// Böylece farklı paketler arasında bağlantı kurulmuş olur.
-
+import chip.Chip;
+import people.PetOwner;
 
 public abstract class Animal {
-//Bu sınıf soyut (abstract) bir sınıftır.
-// new Animal() ile nesne üretilemez.
-//Sadece alt sınıflar tarafından miras alınmak için vardır
-//(örneğin Dog, Cat, Bird).
 
+    private String name;
+    private int age;
+    private double weight;
+    private Gender gender;
+    private String breed;
+    private PetOwner owner;
+    private Chip chip;
 
-    protected AnimalIdentity identity;
-    //Hayvanın kimlik bilgilerini tutar.
-    // protected olduğu için:
-    //Alt sınıflar (Dog, Cat) erişebilir
-    //Dışarıdan doğrudan erişilemez
-    // Kimlik bilgileri ayrı bir sınıfta tutulur (AnimalIdentity).
+    public Animal(String name, int age, double weight, Gender gender, String breed, PetOwner owner) {
 
-    private MedicalRecord medicalRecord;
-//Hayvanın tüm tıbbi geçmişini tutar.
-// private yapılarak encapsulation (kapsülleme) sağlanmıştır.
-// Dışarıdan doğrudan değiştirilemez, sadece metodlar aracılığıyla erişilir.
+        if (age <= 0) {
+            throw new IllegalArgumentException("Yaş 0 veya negatif olamaz.");
+        }
 
+        if (weight <= 0) {
+            throw new IllegalArgumentException("Kilo 0 veya negatif olamaz.");
+        }
 
-    public Animal(AnimalIdentity identity) {
-        //Bu constructor, tüm hayvan türleri için ortak yapıcı metottur.
-        // Her hayvan oluşturulurken kimlik bilgisi zorunlu olarak verilir.
-
-
-        this.identity = identity;
-        this.medicalRecord = new MedicalRecord(); // Tıbbi geçmiş başlatılır
-    }
-    //Hayvanın tıbbi geçmişine kontrollü erişim sağlar.
-    // Veteriner veya sistem bu metot üzerinden kayıt ekleyebilir.
-
-    public AnimalIdentity getIdentity() {
-        return identity;
+        this.name = name;
+        this.age = age;
+        this.weight = weight;
+        this.gender = gender;
+        this.breed = breed;
+        this.owner = owner;
+        this.chip = new Chip();
     }
 
-    public MedicalRecord getMedicalRecord() {
-        return medicalRecord;
+    public String getName() {
+        return name;
     }
 
-    public abstract String getAnimalType();
+    public Chip getChip() {
+        return chip;
+    }
 
-    public abstract String getName();
+    public PetOwner getOwner() {
+        return owner;
+    }
+
+    public abstract String getAnimalInfo();
 }
-//Bu metod abstracttır.
-// Her hayvan türü (Dog, Cat, Bird) bu metodu override etmek zorundadır.
-// Bu sayede polymorphism uygulanır.
-
-
 
 //Animal sınıfı ne sağlar?
 //Abstract class ✔

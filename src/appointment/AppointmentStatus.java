@@ -1,4 +1,8 @@
 package appointment;
 
-public class AppointmentStatus {
+public enum AppointmentStatus {
+    REQUESTED,
+    APPROVED ,
+    CANCELLED,
+    COMPLETED
 }

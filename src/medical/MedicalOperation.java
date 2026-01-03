@@ -7,9 +7,7 @@ traş:
 diş çekimi
 sezaryan
 
- */
-
-
+*/
 
 /*
 ortalama olarak her şırınga başına(enjeksiyon başına) 200tl
@@ -24,9 +22,6 @@ erkek köpek=7000tl, erkek kedi:4000tl
 iç dış parazit tasması( hangi hayvana takılırsa ona daha dikkatli davranılması gerekiyor. 6 ay kadar tasma etkisini gösteriyor. ücreti:3600tl(kiloya göre değişir
 
 */
-
-
-
 
 import animal.Animal;
 import people.Veterinarian;
