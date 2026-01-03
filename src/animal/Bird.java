@@ -1,15 +1,12 @@
 package animal;
 
-import people.PetOwner;
-
 public class Bird extends Animal {
-
-    public Bird(String name, int age, double weight, Gender gender, String breed, PetOwner owner) {
-        super(name, age, weight, gender, breed, owner);
+    public Bird(String chipId, String name, int age, String breed) {
+        super(chipId, name, age, breed);
     }
 
     @Override
-    public String getAnimalInfo() {
-        return "Kuş: " + getName();
+    public void makeSound() {
+        System.out.println("Cik cik cik!");
     }
 }

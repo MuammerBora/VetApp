@@ -1,5 +1,5 @@
 package animal;
-//Hayvanın kimlik kartı gibidir
+//Hayvanın kimlik kartı gibi
 public class AnimalIdentity {
     private String name;
     private int age;

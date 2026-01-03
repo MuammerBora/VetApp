@@ -23,28 +23,18 @@ iç dış parazit tasması( hangi hayvana takılırsa ona daha dikkatli davranı
 
 */
 
-import animal.Animal;
-import people.Veterinarian;
 import java.util.Date;
 
-// ABSTRACT: Bu sınıftan nesne üretilemez, miras alınır.
 public abstract class MedicalOperation {
-    protected Animal patient;
-    protected Veterinarian doctor;
-    protected Date operationDate;
     protected String description;
+    protected Date date;
     protected double cost;
 
-    public MedicalOperation(Animal patient, Veterinarian doctor, String description, double cost) {
-        this.patient = patient;
-        this.doctor = doctor;
+    public MedicalOperation(String description, double cost) {
         this.description = description;
         this.cost = cost;
-        this.operationDate = new Date();
+        this.date = new Date();
     }
 
-    public double getCost() { return cost; }
-
-    // Abstract Metot: Alt sınıflar bu metodu (Rapor yazdırmayı) kendisi tanımlamak ZORUNDA.
-    public abstract void printReport();
+    public abstract void printDetails(); // Her operasyon kendini farklı tanıtır
 }

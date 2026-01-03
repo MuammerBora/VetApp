@@ -4,10 +4,11 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 public class Chip {
-
+/// Chip kayıt anında otomatik kayıt edilicek(random atılacak)
     private final String chipNumber;
     private final LocalDate registerDate;
 
+    //random atan kod burası:::
     public Chip() {
         this.chipNumber = UUID.randomUUID().toString();
         this.registerDate = LocalDate.now();

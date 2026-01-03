@@ -1,54 +1,28 @@
 package animal;
 
-import chip.Chip;
-import people.PetOwner;
+import medical.MedicalRecord;
 
 public abstract class Animal {
-
+    private String chipId;
     private String name;
     private int age;
-    private double weight;
-    private Gender gender;
-    private String breed;
-    private PetOwner owner;
-    private Chip chip;
+    private String breed; //tür cins mesela Maltese Terrier, French Bulldog , Tekir falan
+    private MedicalRecord medicalRecord; // COMPOSITION: Her hayvanın bir karnesi vardır.
 
-    public Animal(String name, int age, double weight, Gender gender, String breed, PetOwner owner) {
-
-        if (age <= 0) {
-            throw new IllegalArgumentException("Yaş 0 veya negatif olamaz.");
-        }
-
-        if (weight <= 0) {
-            throw new IllegalArgumentException("Kilo 0 veya negatif olamaz.");
-        }
-
+    public Animal(String chipId, String name, int age, String breed) {
+        this.chipId = chipId;
         this.name = name;
         this.age = age;
-        this.weight = weight;
-        this.gender = gender;
         this.breed = breed;
-        this.owner = owner;
-        this.chip = new Chip();
+        this.medicalRecord = new MedicalRecord(); // Karne otomatik oluşur
     }
 
-    public String getName() {
-        return name;
-    }
+    // GETTERS & SETTERS (Encapsulation)
+    public String getChipId() { return chipId; }
+    public String getName() { return name; }
+    public int getAge() { return age; }
+    public MedicalRecord getMedicalRecord() { return medicalRecord; }
 
-    public Chip getChip() {
-        return chip;
-    }
-
-    public PetOwner getOwner() {
-        return owner;
-    }
-
-    public abstract String getAnimalInfo();
+    // POLYMORPHISM: Her hayvan farklı ses çıkarır
+    public abstract void makeSound();
 }
-
-//Animal sınıfı ne sağlar?
-//Abstract class ✔
-//Encapsulation ✔
-//Polymorphism altyapısı ✔
-//Tüm hayvanlar için ortak yapı ✔

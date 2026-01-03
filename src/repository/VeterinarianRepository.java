@@ -9,8 +9,8 @@ public class VeterinarianRepository {
     private static List<Veterinarian> veterinarians = new ArrayList<>();
 
     static {
-        veterinarians.add(new Veterinarian("Ayşe", "11111111111"));
-        veterinarians.add(new Veterinarian("Ali",  "22222222222"));
+        // DÜZELTME: Başına 'veterinarians.add' ekledik. Yoksa listeye girmez.
+        veterinarians.add(new Veterinarian("vet1", "Ahmet", "123", 50000.0, "DIP-001"));
     }
 
     public static List<Veterinarian> getAllVeterinarians() {

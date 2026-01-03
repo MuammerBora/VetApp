@@ -1,50 +1,17 @@
 package util;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import exception.InvalidAgeException;
 
-/**
- * WHY:
- * - Konsol uygulamasında kullanıcı boş, hatalı, eksik input girebilir.
- * - Aynı kontrol kodunu her yerde yazmak yerine tek yerde toplarız.
- * - Bu utility, "iş kuralı" değil; sadece "input doğrulama" sağlar.
- */
-public final class ValidationUtil {
-
-    private ValidationUtil() {}
-
-    /**
-     * Boş/space input kontrolü. (null, "", "   " -> true)
-     */
-    public static boolean isBlank(String s) {
-        return s == null || s.trim().isEmpty();
+public class ValidationUtil {
+    // Sadece true/false döndüren basit kontrol
+    public static boolean isValidAge(int age) {
+        return age >= 0;
     }
 
-    /**
-     * Basit ID doğrulama:
-     * - boş olmasın
-     * - çok kısa olmasın
-     */
-    public static boolean isValidId(String id) {
-        return !isBlank(id) && id.trim().length() >= 2;
-    }
-
-    /**
-     * Tarih ve saat parse edilmiş mi kontrol eder.
-     * (DateUtil.parseDate/parseTime null dönebilir)
-     */
-    public static boolean isValidDateTime(LocalDate date, LocalTime time) {
-        return date != null && time != null;
-    }
-
-    /**
-     * Rapor/manager çağrılarında alan boşsa direkt hata fırlatmak istersen diye.
-     * Konsolda try/catch ile yakalayıp mesaj gösterebilirsin.
-     */
-    public static String requireNonBlank(String value, String fieldName) {
-        if (isBlank(value)) {
-            throw new IllegalArgumentException(fieldName + " bos olamaz.");
+    // Hata fırlatan gelişmiş kontrol (Main'de kullandığımız bu)
+    public static void validateAge(int age) throws InvalidAgeException {
+        if (age < 0) {
+            throw new InvalidAgeException("Age cannot be negative! (Input: " + age + ")");
         }
-        return value.trim();
     }
 }

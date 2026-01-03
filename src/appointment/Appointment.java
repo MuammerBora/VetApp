@@ -1,69 +1,33 @@
 package appointment;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import animal.Animal;
+import people.Veterinarian;
+import java.util.Date;
 
 public class Appointment {
-    //private Veterinarian veterinarian;
-    private String ownerId;
-    private String vetId;
-    private String petId;
+    private String appointmentId;
+    private Date appointmentDate;
+    private Animal patient;
+    private Veterinarian doctor;
+    private String reason; // Muayene mi, Aşı mı, Ameliyat mı?
 
-    private LocalDate date;
-    private LocalTime time;
-    private String status;
-
-    public Appointment(String ownerId, String vetId,
-                       LocalDate date, LocalTime time, String status){
-        this.ownerId=ownerId;
-        this.vetId=vetId;
-        this.date=date;
-        this.time=time;
-        this.status=status;
-
-    }
-    public Appointment(String ownerId, String vetId,String petId
-                       LocalDate date, LocalTime time, String status) {
-        this.ownerId = ownerId;
-        this.vetId = vetId;
-        this.date = date;
-        this.time = time;
-        this.status = status;
-        this.petId = petId;
+    public Appointment(Animal patient, Veterinarian doctor, String reason) {
+        this.appointmentId = "APP-" + (int)(Math.random() * 9000 + 1000);
+        this.appointmentDate = new Date(); // Gerçek sistemde kullanıcıdan tarih alınır
+        this.patient = patient;
+        this.doctor = doctor;
+        this.reason = reason;
     }
 
-    //getter-setter metodları
+    // Getters
+    public String getAppointmentId() { return appointmentId; }
+    public Animal getPatient() { return patient; }
+    public Veterinarian getDoctor() { return doctor; }
+    public String getReason() { return reason; }
 
-    public String getPetId() {
-        return petId;
+    @Override
+    public String toString() {
+        return "[" + appointmentId + "] Patient: " + patient.getName() +
+                " | Doctor: " + doctor.getName() + " | Reason: " + reason;
     }
-    public String getOwnerId() {
-        return ownerId;
-    }
-    public boolean getVetId() {
-        return vetId;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public LocalTime getTime() {
-        return time;
-    }
-    public void setTime(LocalTime time) {
-        this.time = time;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-    public void setStatus(AppointmentStatus status) {
-        this.status = status;
-    }
-
-
 }

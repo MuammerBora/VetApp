@@ -14,7 +14,7 @@ public enum Breed {
 
 
 
-//📌 Breed enum ne sağlar?
+// Breed enum ne sağlar?
 //Tip güvenliği ✔
 //Daha temiz kod ✔
 //Gerçek hayat uyumu

@@ -6,12 +6,12 @@ import java.util.ArrayList;
 public class MedicalRecord {
     private ArrayList<MedicalOperation> pastOperations;
     private ArrayList<FutureOperation> futureOperations;
-    private ArrayList<Prescription> prescriptions; // YENİ: Reçete Listesi
+    private ArrayList<Prescription> prescriptions;
 
     public MedicalRecord() {
         this.pastOperations = new ArrayList<>();
         this.futureOperations = new ArrayList<>();
-        this.prescriptions = new ArrayList<>(); // Listeyi başlatıyoruz
+        this.prescriptions = new ArrayList<>();
     }
 
     // OPERASYON EKLEME
@@ -20,27 +20,38 @@ public class MedicalRecord {
         System.out.println("Operation added to records.");
     }
 
-    //  OPERASYON GEÇMİŞİ
+    // OPERASYON GEÇMİŞİ
     public void showHistory() {
         System.out.println("\n--- MEDICAL HISTORY ---");
         if (pastOperations.isEmpty()) {
             System.out.println("No medical records found.");
         } else {
             for (MedicalOperation op : pastOperations) {
-                op.printReport();
+                // DÜZELTME 1: printReport() yerine printDetails() yapıldı.
+                // Çünkü MedicalOperation sınıfında metodun adı printDetails.
+                op.printDetails();
                 System.out.println("-----------------------");
             }
         }
     }
 
-    // İLAÇ YAZMA (Reçete Ekleme)
+    // İLAÇ YAZMA
     public void addPrescription(Prescription p) {
         this.prescriptions.add(p);
         System.out.println("Prescription saved.");
     }
 
-    //  REÇETE GÖRME
+    // REÇETE GÖRME
     public void showPrescriptions() {
         System.out.println("\n--- PRESCRIPTION HISTORY ---");
         if (prescriptions.isEmpty()) {
-            System.out.println("No prescriptions found.")
+            System.out.println("No prescriptions found.");
+        } else {
+            // DÜZELTME 2: Burası eksikti, reçeteleri yazdıran döngüyü ekledim.
+            for (Prescription p : prescriptions) {
+                System.out.println(p.toString());
+                System.out.println("----------------------------");
+            }
+        }
+    }
+}

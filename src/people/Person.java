@@ -1,37 +1,22 @@
 package people;
 
+// ABSTRACT CLASS: Bu sınıftan doğrudan nesne üretilemez, şablon görevi görür.
 public abstract class Person {
-
+    private String id; // TC veya Kimlik No
     private String name;
-    private String tc;
+    private String password;
 
-    public Person(String name, String tc) {
-
-        if (tc == null || tc.length() != 11) {
-            throw new IllegalArgumentException("TC kimlik numarası 11 haneli olmalıdır.");
-        }
-
+    public Person(String id, String name, String password) {
+        this.id = id;
         this.name = name;
-        this.tc = tc;
+        this.password = password;
     }
 
-    public String getName() {
-        return name;
-    }
+    // ENCAPSULATION: private değişkenlere erişim için Getter/Setter kullanımı.
+    public String getId() { return id; }
+    public String getName() { return name; }
+    public String getPassword() { return password; }
 
-    public String getTc() {
-        return tc;
-    }
-
-    public boolean login(String tc) {
-        return this.tc.equals(tc);
-    }
-
+    // POLYMORPHISM: Her alt sınıf bu metodu kendine göre dolduracak.
     public abstract void showMenu();
 }
-
-//Person sınıfı ne sağlar?
-//Abstract class ✔
-//Encapsulation ✔
-//Polymorphism altyapısı ✔
-//Tüm kullanıcıların ortak temeli ✔

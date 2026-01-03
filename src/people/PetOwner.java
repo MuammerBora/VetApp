@@ -1,21 +1,22 @@
 package people;
 
-public class PetOwner extends Person {
+import java.util.ArrayList;
+import animal.Animal;
 
-    public PetOwner(String name, String tc) {
-        super(name, tc);
+public class PetOwner extends Person {
+    private ArrayList<Animal> pets; // COMPOSITION: Bir sahibin birden fazla hayvanı olabilir.
+
+    public PetOwner(String id, String name, String password) {
+        super(id, name, password);
+        this.pets = new ArrayList<>();
     }
+
+    public void addPet(Animal animal) { pets.add(animal); }
+    public ArrayList<Animal> getPets() { return pets; }
 
     @Override
     public void showMenu() {
-        System.out.println("1- Randevu Al");
-        System.out.println("2- Randevu Listem");
-        System.out.println("3- Hayvan Ekle");
-        System.out.println("4- Kayıtlı Hayvanlarım");
-        System.out.println("5- Reçetelerim");
+        System.out.println("\n--- PET OWNER MENU ---");
+        System.out.println("1. My Animals & History\n2. Get Appointment\n3. Profile Info\n0. Logout");
     }
 }
-//PetOwner sınıfı ne sağlar?
-//Inheritance ✔
-//Polymorphism ✔
-//Collection kullanımı ✔

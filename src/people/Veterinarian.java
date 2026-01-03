@@ -1,17 +1,16 @@
 package people;
 
-public class Veterinarian extends Person {
+public class Veterinarian extends Employee {
+    private String diplomaNo;
 
-    public Veterinarian(String name, String tc) {
-        super(name, tc);
+    public Veterinarian(String id, String name, String password, double salary, String diplomaNo) {
+        super(id, name, password, salary);
+        this.diplomaNo = diplomaNo;
     }
 
     @Override
     public void showMenu() {
-        System.out.println("1- Kayıtlı Randevular");
-        System.out.println("2- Kayıtlı Hayvanlar");
-        System.out.println("3- Operasyon Geçmişi");
-        System.out.println("4- Operasyon Ekle");
-        System.out.println("5- İlaç Yaz");
+        System.out.println("\n--- VETERINARIAN MENU ---");
+        System.out.println("1. Scan Chip (Animal Info)\n2. Write Prescription\n3. Give Appointment\n0. Logout");
     }
 }

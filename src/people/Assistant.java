@@ -1,13 +1,14 @@
 package people;
 
 public class Assistant extends Employee {
-
-    public Assistant(String id, String name, String email, String password, String department) {
-        super(id, name, email, password, department);
+    public Assistant(String id, String name, String password, double salary) {
+        super(id, name, password, salary);
     }
 
     @Override
-    public void showRole() {
-        System.out.println("Rol: ASİSTAN");
+    public void showMenu() {
+        System.out.println("--- ASSISTANT MENU ---");
+        System.out.println("1. View Schedule");
+        System.out.println("0. Logout");
     }
 }
