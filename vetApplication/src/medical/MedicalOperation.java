@@ -23,22 +23,12 @@ iç dış parazit tasması( hangi hayvana takılırsa ona daha dikkatli davranı
 
 package medical;
 
-import animal.Animal;
-import people.Veterinarian;
-
 public abstract class MedicalOperation {
-
-    protected Animal patient;
-    protected Veterinarian doctor;
     protected String description;
     protected double cost;
 
-    public MedicalOperation(Animal patient,
-                            Veterinarian doctor,
-                            String description,
-                            double cost) {
-        this.patient = patient;
-        this.doctor = doctor;
+    // Sadece 2 parametre alan yeni kurucu metod
+    public MedicalOperation(String description, double cost) {
         this.description = description;
         this.cost = cost;
     }

@@ -1,24 +1,18 @@
 package medical;
 
-import animal.Animal;
-import people.Veterinarian;
+public class DiseaseTreatment extends MedicalOperation {
 
-public abstract class DiseaseTreatment extends MedicalOperation {
-
-    public DiseaseTreatment(Animal patient,
-                            Veterinarian doctor,
-                            String description,
-                            double cost) {
-        super(patient, doctor, description, cost);
+    public DiseaseTreatment(String description, double cost) {
+        super(description, cost);
     }
 
     @Override
     public void printDetails() {
-        System.out.println(
-                "[TREATMENT] " + description +
-                        " | Patient: " + patient.getName() +
-                        " | Doctor: " + doctor.getName() +
-                        " | Cost: " + cost + " TL"
-        );
+        System.out.println("[TREATMENT] " + description + " | Cost: " + cost + " TL");
+    }
+
+    @Override
+    public void printReport() {
+        System.out.println("Generating treatment report for: " + description);
     }
 }

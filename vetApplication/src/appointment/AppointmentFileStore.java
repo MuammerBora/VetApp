@@ -1,10 +1,6 @@
 package appointment;
-import appointment.Appointment;
-import appointment.AppointmentStatus;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.nio.file.*;
+
+import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -12,86 +8,91 @@ import java.util.List;
 
 public class AppointmentFileStore {
 
-    private final Path filePath;
+    // Dosya yolu bulma mantığımız (Aynı kalıyor)
+    private static final String FILE_NAME_DEFAULT = "appointments.txt";
+    private static final String FILE_NAME_NESTED = "vetApplication/appointments.txt";
 
-    public AppointmentFileStore(String fileName) {
-        this.filePath = Paths.get(fileName);
-        ensureFileExists();
+    private final String fileName;
+
+    public AppointmentFileStore(String fileNameIgnored) {
+        this.fileName = getFilePath();
     }
 
-    private void ensureFileExists() {
-        try {
-            if (!Files.exists(filePath)) {
-                Files.createFile(filePath);
-            }
+    private String getFilePath() {
+        File file = new File(FILE_NAME_DEFAULT);
+        if (file.exists()) {
+            return FILE_NAME_DEFAULT;
+        }
+        File nestedFile = new File(FILE_NAME_NESTED);
+        if (nestedFile.exists()) {
+            return FILE_NAME_NESTED;
+        }
+        return FILE_NAME_DEFAULT;
+    }
+
+    // --- İŞTE DÜZELTİLEN KISIMLAR ---
+
+    // Eskiden 'add' idi, şimdi 'append' oldu
+    public void append(Appointment appointment) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true))) {
+            writer.write(appointment.getChipNumber() + "," +
+                    appointment.getVetTc() + "," +
+                    appointment.getOwnerTc() + "," +
+                    appointment.getDate() + "," +
+                    appointment.getTime() + "," +
+                    appointment.getStatus());
+            writer.newLine();
         } catch (IOException e) {
-            throw new RuntimeException("File could not be created", e);
+            System.out.println("❌ Appointment file write error: " + e.getMessage());
         }
     }
 
+    // Eskiden 'getAll' idi, şimdi 'loadAll' oldu
     public List<Appointment> loadAll() {
-        List<Appointment> list = new ArrayList<>();
+        List<Appointment> appointments = new ArrayList<>();
+        File file = new File(fileName);
 
-        try (BufferedReader br = Files.newBufferedReader(filePath)) {
+        if (!file.exists()) {
+            // Dosya yoksa boş liste dön, hata verme
+            return appointments;
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
-
-            while ((line = br.readLine()) != null) {
-                if (line.isBlank()) continue;
-
-                // vetTc,ownerTc,chip,date,time,status
-                String[] p = line.split(",");
-                if (p.length != 6) continue;
-
-                Appointment a = new Appointment(
-                        p[0],
-                        p[1],
-                        p[2],
-                        LocalDate.parse(p[3]),
-                        LocalTime.parse(p[4]),
-                        AppointmentStatus.valueOf(p[5])
-                );
-
-                list.add(a);
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                // Basit bir koruma: Satırda eksik bilgi varsa atla
+                if (parts.length >= 6) {
+                    appointments.add(new Appointment(
+                            parts[2], // OwnerTC
+                            parts[1], // VetTC
+                            parts[0], // Chip
+                            LocalDate.parse(parts[3]),
+                            LocalTime.parse(parts[4]),
+                            AppointmentStatus.valueOf(parts[5])
+                    ));
+                }
             }
         } catch (IOException e) {
-            throw new RuntimeException("File read error", e);
+            System.out.println("❌ Appointment file read error.");
         }
-
-        return list;
+        return appointments;
     }
 
-    public void append(Appointment a) {
-        try (BufferedWriter bw = Files.newBufferedWriter(
-                filePath, StandardOpenOption.APPEND)) {
-
-            bw.write(toLine(a));
-            bw.newLine();
-
-        } catch (IOException e) {
-            throw new RuntimeException("File write error", e);
-        }
-    }
-
+    // Eskiden 'update' idi, şimdi 'overwriteAll' oldu
     public void overwriteAll(List<Appointment> appointments) {
-        try (BufferedWriter bw = Files.newBufferedWriter(
-                filePath, StandardOpenOption.TRUNCATE_EXISTING)) {
-
-            for (Appointment a : appointments) {
-                bw.write(toLine(a));
-                bw.newLine();
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+            for (Appointment appointment : appointments) {
+                writer.write(appointment.getChipNumber() + "," +
+                        appointment.getVetTc() + "," +
+                        appointment.getOwnerTc() + "," +
+                        appointment.getDate() + "," +
+                        appointment.getTime() + "," +
+                        appointment.getStatus());
+                writer.newLine();
             }
-
         } catch (IOException e) {
-            throw new RuntimeException("File update error", e);
+            System.out.println("❌ File overwrite error: " + e.getMessage());
         }
-    }
-
-    private String toLine(Appointment a) {
-        return a.getVetTc() + "," +
-                a.getOwnerTc() + "," +
-                a.getChipNumber() + "," +
-                a.getDate() + "," +
-                a.getTime() + "," +
-                a.getStatus().name();
     }
 }

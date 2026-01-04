@@ -54,4 +54,14 @@ public class Appointment {
     public void setStatus(AppointmentStatus status) {
         this.status = status;
     }
+
+    public String toString() {
+        return "Date=" + date +
+                " Time=" + time +
+                " | Chip=" + chipNumber +
+                " | OwnerTC=" + ownerTc +
+                " | VetTC=" + vetTc +
+                " | Status=" + status;
+    }
+
 }

@@ -1,0 +1,6 @@
+=== PRESCRIPTION ===
+Date: Sun Jan 04 21:40:52 GMT+03:00 2026
+Doctor: Ali
+Patient: Hasta-d82dd760-140b-47d8-b06e-eb8744270248
+Medicine: ecotonic (General)
+Dosage: 50mg - 3

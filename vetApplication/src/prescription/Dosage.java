@@ -1,18 +1,17 @@
 package prescription;
 
 public class Dosage {
-    private int timesPerDay;
-    private int quantity;
-    private String duration; // örn: "1 Week"
+    // int yerine String yapıyoruz ki "50mg" yazılabilsin.
+    private String amount;    // Örn: "50mg", "1 Tablet"
+    private String frequency; // Örn: "Günde 2 kez"
 
-    public Dosage(int timesPerDay, int quantity, String duration) {
-        this.timesPerDay = timesPerDay;
-        this.quantity = quantity;
-        this.duration = duration;
+    public Dosage(String amount, String frequency) {
+        this.amount = amount;
+        this.frequency = frequency;
     }
 
     @Override
     public String toString() {
-        return quantity + "x " + timesPerDay + " times/day for " + duration;
+        return amount + " - " + frequency;
     }
 }

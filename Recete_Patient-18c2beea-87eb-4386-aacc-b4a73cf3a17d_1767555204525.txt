@@ -1,0 +1,6 @@
+=== PRESCRIPTION ===
+Date: Sun Jan 04 22:33:24 GMT+03:00 2026
+Doctor: Ali
+Patient: Patient-18c2beea-87eb-4386-aacc-b4a73cf3a17d
+Medicine: Corti (General)
+Dosage: 88mg - 2

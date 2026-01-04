@@ -1,29 +1,17 @@
 package medical;
 
-import animal.Animal;
-import people.Veterinarian;
-
 public class Checkup extends MedicalOperation {
-
-    public Checkup(Animal patient,
-                   Veterinarian doctor,
-                   String description,
-                   double cost) {
-        super(patient, doctor, description, cost);
-    }
-
-    @Override
-    public void printReport() {
-
+    public Checkup(String description, double cost) {
+        super(description, cost);
     }
 
     @Override
     public void printDetails() {
-        System.out.println(
-                "[CHECK-UP] " + description +
-                        " | Patient: " + patient.getName() +
-                        " | Doctor: " + doctor.getName() +
-                        " | Cost: " + cost + " TL"
-        );
+        System.out.println("[CHECK-UP] " + description + " | Cost: " + cost + " TL");
+    }
+
+    @Override
+    public void printReport() {
+        System.out.println("Generating check-up report...");
     }
 }
